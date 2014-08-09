@@ -1,0 +1,45 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.73.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+SHA1 9a023e360de5572623d76300336c73315f81c510 Changes
+SHA1 2a8f37de741678ecfce3833c5e71a732d4f5d1e5 MANIFEST
+SHA1 ba14f8d4445571159f64ad5dabacc8ca113da018 META.json
+SHA1 0076effb68b79fb69e7b480a8f92d26cb4ea36d8 META.yml
+SHA1 f5e46aac04ae298cee305e7ebb94c763f9b277dc Makefile.PL
+SHA1 e6fffcbd01e8deb749934cc9b6f9b5a2f5fbacf5 README
+SHA1 92a295e6d9eb9cf043fc5c02ac62f450dde20879 app.psgi
+SHA1 fdf045b2aa9c53c36d6a20e5344af71727b1d805 cfg/options.yml
+SHA1 11ad5f5f9823edb137e7376477b70bb524017732 index.html
+SHA1 79f59ba5610351bc554a96c6e276d2291c8cf9ab lib/App/Web/VPKBuilder.pm
+SHA1 bb670f3dc1b2a7ce253b108830ef5f52e2a9e7b1 static/index.css
+SHA1 1e959cae88b462941c876fb32c78f484b526956b t/App-Web-VPKBuilder.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBCgAGBQJT5o/mAAoJEMoENb5ewbNixrYP/i+AvO5H646UZLSFkAgOHk7e
+W45z7Mpq46r6/jnz80okUE5jcHQ5GupJbtoaQMuw7KIQSy9OMGasOuKIm7reKd4V
+WgTgy2C/bCpKVomafqoD5+jZD9QhwBLrkjTNJx9SXR3NWvy/8QpA6mcWZqDnpPnD
+wg8GlfdseOOwKcH0s7JMtfvPXkbJcqIYl0dWA7tMbsUbfUSGjmx7YVGAEJlng1bR
++DiZX6/H0JUkW5bLGvDyi+CxI7oHN3VPodbJQVdxTIr44VlCzDrQiRHaHYCblTeX
+cwOGvhaI+zCl5iByRcT+1ceawz89hf7MpFgQ6TbztsHmZkL1NFCMEEorhg8qrGrP
+BKyalYixb/gAmuzIngWTk5zydv+4zLnIWRQhVFBweIDp7b1b/NQxkWIuhqAXJTG7
+gHEjeX5USlObAPF9obds3cEjXtWv7wmyiP8no9dSzCLON2BCGvOiXUYvnT5fei8u
+nMe2kyDJPUwWJ868Y7FV/ilNwGStRPVuCIB4j7pxMCl/cz6LQObbJYEWJuc3SAMq
+jdfx6hQQTHI54f/uvTV7zzYeaCecnDGNTaKxwfY7IoXQBldmo89WW/EcB7HPsiyQ
+Mev9En/jsfwFF0lj3gn/FDR25aDc9HoxsDn+fxDpx39y4gUtLZaEHNKaM7RzFAK5
+HcntMxvG5zYFLzPLqa8x
+=Q9pK
+-----END PGP SIGNATURE-----
