@@ -15,7 +15,7 @@ WriteMakefile(
 		   File::Path            0
 		   File::Spec::Functions 0
 		   File::Temp            0
-		   IO::Compress::Zip     0
+		   IO::Compress::Zip     2.039
 		   sigtrap               0
 
 		   Data::Diver       0

@@ -4,7 +4,7 @@
       "Marius Gavrilescu <marius@ieval.ro>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.142060",
+   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.142060",
    "license" : [
       "perl_5"
    ],
@@ -42,7 +42,7 @@
             "HTML::Element" : "0",
             "HTML::TreeBuilder" : "0",
             "Hash::Merge" : "0",
-            "IO::Compress::Zip" : "0",
+            "IO::Compress::Zip" : "2.039",
             "List::MoreUtils" : "0",
             "Plack::Builder" : "0",
             "Plack::Component" : "0",
@@ -60,5 +60,5 @@
          "url" : "http://git.ieval.ro/?p=app-web-vpkbuilder.git"
       }
    },
-   "version" : "0.000_001"
+   "version" : "0.000_002"
 }

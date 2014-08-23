@@ -4,12 +4,11 @@ use 5.014000;
 use strict;
 use warnings;
 use parent qw/Plack::Component/;
-our $VERSION = '0.000_001';
+our $VERSION = '0.000_002';
 
-use File::Basename qw/fileparse/;
 use File::Find qw/find/;
 use File::Path qw/remove_tree/;
-use File::Spec::Functions qw/catfile rel2abs/;
+use File::Spec::Functions qw/abs2rel catfile rel2abs/;
 use File::Temp qw/tempdir/;
 use IO::Compress::Zip qw/zip ZIP_CM_LZMA/;
 use sigtrap qw/die normal-signals/;
@@ -31,7 +30,6 @@ sub new {
 		my $cfg = LoadFile $_;
 		$self->{cfg} = merge $self->{cfg}, $cfg
 	}
-	$self->{cfg}{vpk}           //= 'vpk';
 	$self->{cfg}{vpk_extension} //= 'vpk';
 	$self->{cfg}{sort} = sbe $self->{cfg}{sort_order}, { fallback => sub { shift cmp shift } };
 	$self
@@ -57,12 +55,19 @@ sub makepkg {
 	my $dir = rel2abs tempdir 'workXXXX', DIR => $self->{cfg}{dir};
 	my $dest = catfile $dir, 'pkg';
 	mkdir $dest;
+	@pkgs = grep { exists $self->{cfg}{pkgs}{$_} } @pkgs;
 	push @pkgs, split ',', ($self->{cfg}{pkgs}{$_}{deps} // '') for @pkgs;
 	@pkgs = uniq @pkgs;
 	addpkg $_, $dest for @pkgs;
-	system $self->{cfg}{vpk} => $dest;
 	write_file catfile ($dir, 'readme.txt'), $self->{cfg}{readme};
-	zip [catfile($dir, "pkg.$self->{cfg}{vpk_extension}"), catfile($dir, 'readme.txt')], catfile($dir, 'pkg.zip'), FilterName => sub { $_ = fileparse $_ }, -Level => 1;
+	my @zip_files = catfile $dir, 'readme.txt';
+	if ($self->{cfg}{vpk}) {
+		system $self->{cfg}{vpk} => $dest;
+		push @zip_files, catfile $dir, "pkg.$self->{cfg}{vpk_extension}"
+	} else {
+		find sub { push @zip_files, $File::Find::name if -f }, $dest;
+	}
+	zip \@zip_files, catfile($dir, 'pkg.zip'), FilterName => sub { $_ = abs2rel $_, $dir }, -Level => 1;
 	open my $fh, '<', catfile $dir, 'pkg.zip';
 	remove_tree $dir;
 	[200, ['Content-Type' => 'application/zip', 'Content-Disposition' => 'attachment; filename=pkg.zip'], $fh]
@@ -162,11 +167,11 @@ A string representing the directory in which the packages are built. Must be on 
 
 =item vpk
 
-A string representing the program that makes a package out of a folder. Must behave like the vpk program included with Source engine games: that is, when called like C<vpk path/to/folder> it should create a file F<path/to/folder.ext>, where C<ext> is given by the next option. Defaults to 'vpk' (requires a script named vpk in the PATH).
+A string representing the program that makes a package out of a folder. Must behave like the vpk program included with Source engine games: that is, when called like C<vpk path/to/folder> it should create a file F<path/to/folder.ext>, where C<ext> is given by the next option. If not provided, the folder is included as-is.
 
 =item vpk_extension
 
-The extension of a package. Defaults to C<vpk>
+The extension of a package. Only useful with the C<vpk> option. Defaults to C<vpk>
 
 =back
 
